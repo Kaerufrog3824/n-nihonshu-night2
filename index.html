@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>N 日本酒 Night vol.2</title>
+  <title>Nikkei Nihonshu Night ─ 一合一会</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700;900&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -13,7 +13,7 @@
   <!-- ===== Navigation ===== -->
   <nav id="navbar">
     <div class="nav-inner">
-      <a href="#hero" class="nav-logo">N 日本酒 Night</a>
+      <a href="#hero" class="nav-logo">Nikkei Nihonshu Night</a>
       <ul class="nav-links">
         <li><a href="#about">概要</a></li>
         <li><a href="#lineup">ラインナップ</a></li>
@@ -34,10 +34,14 @@
         <img src="images/NNN_logo.jpg" alt="NNN Logo" class="hero-logo">
       </div>
       <h1 class="hero-title reveal">
-        <span class="hero-title-line">N 日本酒 Night</span>
-        <span class="hero-title-sub">vol.2</span>
+        <span class="hero-title-line">Nikkei Nihonshu Night</span>
+        <span class="hero-title-sub">一合一会</span>
       </h1>
-      <p class="hero-catch reveal">── 一杯の出会いが、夜を彩る ──</p>
+      <p class="hero-catch reveal">── あなたにぴったりの一杯を見つけよう ──</p>
+      <a href="#diagnosis" class="hero-cta reveal">
+        <span>日本酒診断をはじめる</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+      </a>
     </div>
     <div class="scroll-indicator">
       <span>Scroll</span>
@@ -116,84 +120,171 @@
 
   <!-- ===== Diagnosis ===== -->
   <section id="diagnosis">
-    <div class="container">
-      <h2 class="section-title reveal">
-        <span class="section-title-en">Diagnosis</span>
-        <span class="section-title-ja">日本酒診断</span>
-      </h2>
-      <p class="diagnosis-intro reveal">4つの質問に答えて、あなたにぴったりの日本酒を見つけましょう。</p>
-
-      <!-- Diagnosis Form -->
-      <div id="diagnosis-form" class="diagnosis-form reveal">
-        <div class="axis-group" data-axis="sweetDry">
-          <h3 class="axis-title">甘口 ・ 辛口</h3>
-          <div class="axis-selector">
-            <span class="axis-label-left">甘口</span>
-            <div class="axis-buttons">
-              <button class="axis-btn" data-value="1">1</button>
-              <button class="axis-btn" data-value="2">2</button>
-              <button class="axis-btn selected" data-value="3">3</button>
-              <button class="axis-btn" data-value="4">4</button>
-              <button class="axis-btn" data-value="5">5</button>
-            </div>
-            <span class="axis-label-right">辛口</span>
-          </div>
-        </div>
-
-        <div class="axis-group" data-axis="richLight">
-          <h3 class="axis-title">芳醇 ・ 淡麗</h3>
-          <div class="axis-selector">
-            <span class="axis-label-left">芳醇</span>
-            <div class="axis-buttons">
-              <button class="axis-btn" data-value="1">1</button>
-              <button class="axis-btn" data-value="2">2</button>
-              <button class="axis-btn selected" data-value="3">3</button>
-              <button class="axis-btn" data-value="4">4</button>
-              <button class="axis-btn" data-value="5">5</button>
-            </div>
-            <span class="axis-label-right">淡麗</span>
-          </div>
-        </div>
-
-        <div class="axis-group" data-axis="aroma">
-          <h3 class="axis-title">香り</h3>
-          <div class="axis-selector">
-            <span class="axis-label-left">フルーティー</span>
-            <div class="axis-buttons">
-              <button class="axis-btn" data-value="1">1</button>
-              <button class="axis-btn" data-value="2">2</button>
-              <button class="axis-btn selected" data-value="3">3</button>
-              <button class="axis-btn" data-value="4">4</button>
-              <button class="axis-btn" data-value="5">5</button>
-            </div>
-            <span class="axis-label-right">スッキリ</span>
-          </div>
-        </div>
-
-        <div class="axis-group" data-axis="mouthfeel">
-          <h3 class="axis-title">飲み口</h3>
-          <div class="axis-selector">
-            <span class="axis-label-left">まろやか</span>
-            <div class="axis-buttons">
-              <button class="axis-btn" data-value="1">1</button>
-              <button class="axis-btn" data-value="2">2</button>
-              <button class="axis-btn selected" data-value="3">3</button>
-              <button class="axis-btn" data-value="4">4</button>
-              <button class="axis-btn" data-value="5">5</button>
-            </div>
-            <span class="axis-label-right">キレ</span>
-          </div>
-        </div>
-
-        <button id="diagnose-btn" class="btn-primary">
-          <span>診断する</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    <!-- Diagnosis Hero Banner -->
+    <div id="diag-intro" class="diag-intro">
+      <div class="diag-intro-bg"></div>
+      <div class="container diag-intro-content">
+        <span class="diag-intro-label reveal">Main Feature</span>
+        <h2 class="diag-intro-title reveal">日本酒診断</h2>
+        <p class="diag-intro-desc reveal">
+          4つの質問に答えるだけで、<br>会場にある12銘柄の中からあなたの好みにぴったりの<br class="sp-hide">日本酒 BEST 3 をご提案します。
+        </p>
+        <button id="diag-start-btn" class="diag-start-btn reveal">
+          <span>診断スタート</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>
         </button>
       </div>
+    </div>
 
-      <!-- Results -->
-      <div id="diagnosis-results" class="diagnosis-results hidden">
-        <h3 class="results-heading">あなたにおすすめの日本酒</h3>
+    <!-- Wizard -->
+    <div id="diag-wizard" class="diag-wizard hidden">
+      <div class="container">
+        <!-- Progress -->
+        <div class="diag-progress">
+          <div class="diag-progress-track">
+            <div class="diag-progress-fill" id="diag-progress-fill"></div>
+          </div>
+          <div class="diag-progress-steps">
+            <span class="diag-step-dot active" data-step="0"></span>
+            <span class="diag-step-dot" data-step="1"></span>
+            <span class="diag-step-dot" data-step="2"></span>
+            <span class="diag-step-dot" data-step="3"></span>
+          </div>
+          <div class="diag-step-counter"><span id="diag-current-step">1</span> / 4</div>
+        </div>
+
+        <!-- Slides container -->
+        <div class="diag-slides" id="diag-slides">
+          <!-- Step 1 -->
+          <div class="diag-slide active" data-axis="sweetDry">
+            <h3 class="diag-slide-title">甘さの好みは？</h3>
+            <p class="diag-slide-sub">甘口と辛口、どちらが好みですか？</p>
+            <div class="diag-scale">
+              <span class="diag-scale-label diag-scale-label-left">甘口</span>
+              <div class="diag-scale-track">
+                <div class="diag-scale-line">
+                  <div class="diag-scale-line-fill"></div>
+                </div>
+                <div class="diag-scale-points">
+                  <button class="diag-point" data-value="1"><span class="diag-point-circle"></span></button>
+                  <button class="diag-point" data-value="2"><span class="diag-point-circle"></span></button>
+                  <button class="diag-point selected" data-value="3"><span class="diag-point-circle"></span></button>
+                  <button class="diag-point" data-value="4"><span class="diag-point-circle"></span></button>
+                  <button class="diag-point" data-value="5"><span class="diag-point-circle"></span></button>
+                </div>
+              </div>
+              <span class="diag-scale-label diag-scale-label-right">辛口</span>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="diag-slide" data-axis="richLight">
+            <h3 class="diag-slide-title">味わいの好みは？</h3>
+            <p class="diag-slide-sub">芳醇でコクのあるタイプ、それとも淡麗でスッキリ？</p>
+            <div class="diag-scale">
+              <span class="diag-scale-label diag-scale-label-left">芳醇</span>
+              <div class="diag-scale-track">
+                <div class="diag-scale-line">
+                  <div class="diag-scale-line-fill"></div>
+                </div>
+                <div class="diag-scale-points">
+                  <button class="diag-point" data-value="1"><span class="diag-point-circle"></span></button>
+                  <button class="diag-point" data-value="2"><span class="diag-point-circle"></span></button>
+                  <button class="diag-point selected" data-value="3"><span class="diag-point-circle"></span></button>
+                  <button class="diag-point" data-value="4"><span class="diag-point-circle"></span></button>
+                  <button class="diag-point" data-value="5"><span class="diag-point-circle"></span></button>
+                </div>
+              </div>
+              <span class="diag-scale-label diag-scale-label-right">淡麗</span>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="diag-slide" data-axis="aroma">
+            <h3 class="diag-slide-title">香りの好みは？</h3>
+            <p class="diag-slide-sub">華やかでフルーティーな香り、それともスッキリ控えめ？</p>
+            <div class="diag-scale">
+              <span class="diag-scale-label diag-scale-label-left">フルーティー</span>
+              <div class="diag-scale-track">
+                <div class="diag-scale-line">
+                  <div class="diag-scale-line-fill"></div>
+                </div>
+                <div class="diag-scale-points">
+                  <button class="diag-point" data-value="1"><span class="diag-point-circle"></span></button>
+                  <button class="diag-point" data-value="2"><span class="diag-point-circle"></span></button>
+                  <button class="diag-point selected" data-value="3"><span class="diag-point-circle"></span></button>
+                  <button class="diag-point" data-value="4"><span class="diag-point-circle"></span></button>
+                  <button class="diag-point" data-value="5"><span class="diag-point-circle"></span></button>
+                </div>
+              </div>
+              <span class="diag-scale-label diag-scale-label-right">スッキリ</span>
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="diag-slide" data-axis="mouthfeel">
+            <h3 class="diag-slide-title">飲み口の好みは？</h3>
+            <p class="diag-slide-sub">まろやかな舌触り、それともキレのある後味？</p>
+            <div class="diag-scale">
+              <span class="diag-scale-label diag-scale-label-left">まろやか</span>
+              <div class="diag-scale-track">
+                <div class="diag-scale-line">
+                  <div class="diag-scale-line-fill"></div>
+                </div>
+                <div class="diag-scale-points">
+                  <button class="diag-point" data-value="1"><span class="diag-point-circle"></span></button>
+                  <button class="diag-point" data-value="2"><span class="diag-point-circle"></span></button>
+                  <button class="diag-point selected" data-value="3"><span class="diag-point-circle"></span></button>
+                  <button class="diag-point" data-value="4"><span class="diag-point-circle"></span></button>
+                  <button class="diag-point" data-value="5"><span class="diag-point-circle"></span></button>
+                </div>
+              </div>
+              <span class="diag-scale-label diag-scale-label-right">キレ</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="diag-nav">
+          <button id="diag-prev" class="diag-nav-btn diag-nav-prev" disabled>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+            <span>戻る</span>
+          </button>
+          <button id="diag-next" class="diag-nav-btn diag-nav-next">
+            <span>次へ</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Analyzing Animation -->
+    <div id="diag-analyzing" class="diag-analyzing hidden">
+      <div class="analyzing-inner">
+        <div class="analyzing-sake-icon">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="20" y="16" width="24" height="40" rx="4" stroke="currentColor" stroke-width="2"/>
+            <path d="M20 28h24" stroke="currentColor" stroke-width="2"/>
+            <circle cx="32" cy="38" r="6" stroke="currentColor" stroke-width="2"/>
+            <path d="M29 38h6" stroke="currentColor" stroke-width="2"/>
+            <path d="M32 35v6" stroke="currentColor" stroke-width="2"/>
+            <path d="M26 8h12v8H26z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="analyzing-dots">
+          <span></span><span></span><span></span>
+        </div>
+        <p class="analyzing-text">あなたにぴったりの日本酒を<br>探しています...</p>
+      </div>
+    </div>
+
+    <!-- Results -->
+    <div id="diagnosis-results" class="diagnosis-results hidden">
+      <div class="container">
+        <div class="results-header">
+          <h3 class="results-heading">あなたにおすすめの日本酒</h3>
+          <p class="results-sub">BEST 3</p>
+        </div>
         <div class="results-cards" id="results-cards">
           <!-- Generated by JS -->
         </div>
@@ -208,7 +299,7 @@
   <!-- ===== Footer ===== -->
   <footer id="footer">
     <div class="container">
-      <p class="footer-text">N 日本酒 Night vol.2 &mdash; 社内イベント</p>
+      <p class="footer-text">Nikkei Nihonshu Night &mdash; 一合一会</p>
       <p class="footer-copy">&copy; 2026 NNN. Internal use only.</p>
     </div>
   </footer>

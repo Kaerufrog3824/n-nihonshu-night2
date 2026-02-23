@@ -205,97 +205,216 @@ function renderLineup() {
 }
 
 /* --------------------------------------------------
-   Diagnosis System
+   Diagnosis System — Step-by-Step Wizard
    -------------------------------------------------- */
 function initDiagnosis() {
-  const form = document.getElementById("diagnosis-form");
+  const intro = document.getElementById("diag-intro");
+  const wizard = document.getElementById("diag-wizard");
+  const analyzing = document.getElementById("diag-analyzing");
   const resultsSection = document.getElementById("diagnosis-results");
-  const diagnoseBtn = document.getElementById("diagnose-btn");
+  const startBtn = document.getElementById("diag-start-btn");
+  const prevBtn = document.getElementById("diag-prev");
+  const nextBtn = document.getElementById("diag-next");
   const retryBtn = document.getElementById("retry-btn");
+  const slides = document.querySelectorAll(".diag-slide");
+  const progressFill = document.getElementById("diag-progress-fill");
+  const stepDots = document.querySelectorAll(".diag-step-dot");
+  const stepCounter = document.getElementById("diag-current-step");
 
-  if (!form || !diagnoseBtn) return;
+  if (!startBtn || slides.length === 0) return;
 
-  // Axis button selection
-  form.querySelectorAll(".axis-group").forEach((group) => {
-    const btns = group.querySelectorAll(".axis-btn");
-    btns.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        btns.forEach((b) => b.classList.remove("selected"));
-        btn.classList.add("selected");
+  let currentStep = 0;
+  const totalSteps = slides.length;
+
+  // --- Point selection for each slide ---
+  slides.forEach((slide) => {
+    const points = slide.querySelectorAll(".diag-point");
+    const lineFill = slide.querySelector(".diag-scale-line-fill");
+
+    points.forEach((point) => {
+      point.addEventListener("click", () => {
+        points.forEach((p) => p.classList.remove("selected"));
+        point.classList.add("selected");
+
+        // Update line fill
+        const val = parseInt(point.dataset.value);
+        if (lineFill) {
+          lineFill.style.width = `${((val - 1) / 4) * 100}%`;
+        }
       });
     });
+
+    // Init line fill for default (value 3)
+    if (lineFill) {
+      lineFill.style.width = "50%";
+    }
   });
 
-  // Diagnose
-  diagnoseBtn.addEventListener("click", () => {
-    const preferences = {};
-    form.querySelectorAll(".axis-group").forEach((group) => {
-      const axis = group.dataset.axis;
-      const selected = group.querySelector(".axis-btn.selected");
-      preferences[axis] = selected ? parseInt(selected.dataset.value) : 3;
+  // --- Show/hide helpers ---
+  function showSection(el) {
+    el.classList.remove("hidden");
+    el.style.opacity = "0";
+    el.style.transform = "translateY(20px)";
+    el.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+    requestAnimationFrame(() => {
+      el.style.opacity = "1";
+      el.style.transform = "translateY(0)";
     });
+  }
 
-    const results = calculateMatch(preferences);
-    renderResults(results);
-
-    // Animate transition
-    form.style.opacity = "0";
-    form.style.transform = "translateY(-16px)";
+  function hideSection(el, callback) {
+    el.style.transition = "opacity 0.4s ease, transform 0.4s ease";
+    el.style.opacity = "0";
+    el.style.transform = "translateY(-16px)";
     setTimeout(() => {
-      form.style.display = "none";
-      resultsSection.classList.remove("hidden");
-      resultsSection.style.opacity = "0";
-      resultsSection.style.transform = "translateY(16px)";
-
-      requestAnimationFrame(() => {
-        resultsSection.style.transition =
-          "opacity 0.6s ease, transform 0.6s ease";
-        resultsSection.style.opacity = "1";
-        resultsSection.style.transform = "translateY(0)";
-
-        // Stagger result cards
-        const cards = resultsSection.querySelectorAll(".result-card");
-        cards.forEach((card, i) => {
-          setTimeout(() => {
-            card.classList.add("visible");
-            // Animate match bar
-            const fill = card.querySelector(".result-match-fill");
-            if (fill) {
-              fill.style.width = fill.dataset.width;
-            }
-          }, 200 + i * 200);
-        });
-
-        // Scroll to results
-        setTimeout(() => {
-          resultsSection.scrollIntoView({ behavior: "smooth", block: "start" });
-        }, 100);
-      });
+      el.classList.add("hidden");
+      el.style.opacity = "";
+      el.style.transform = "";
+      el.style.transition = "";
+      if (callback) callback();
     }, 400);
+  }
+
+  // --- Step navigation ---
+  function goToStep(step) {
+    const dir = step > currentStep ? 1 : -1;
+
+    // Exit current slide
+    slides[currentStep].classList.remove("active");
+    slides[currentStep].classList.add(dir > 0 ? "exit-left" : "");
+    slides[currentStep].style.transform = `translateX(${dir > 0 ? "-60px" : "60px"})`;
+
+    // Enter new slide
+    currentStep = step;
+    slides[currentStep].style.transform = `translateX(${dir > 0 ? "60px" : "-60px"})`;
+    slides[currentStep].classList.remove("exit-left");
+
+    requestAnimationFrame(() => {
+      slides[currentStep].classList.add("active");
+    });
+
+    // Update progress
+    progressFill.style.width = `${((currentStep + 1) / totalSteps) * 100}%`;
+    stepDots.forEach((dot, i) => {
+      dot.classList.remove("active", "done");
+      if (i < currentStep) dot.classList.add("done");
+      if (i === currentStep) dot.classList.add("active");
+    });
+    stepCounter.textContent = currentStep + 1;
+
+    // Update buttons
+    prevBtn.disabled = currentStep === 0;
+
+    if (currentStep === totalSteps - 1) {
+      nextBtn.innerHTML =
+        '<span>診断する</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>';
+      nextBtn.classList.add("final-step");
+    } else {
+      nextBtn.innerHTML =
+        '<span>次へ</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>';
+      nextBtn.classList.remove("final-step");
+    }
+
+    // Scroll wizard into view
+    wizard.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  // --- Collect preferences ---
+  function collectPreferences() {
+    const prefs = {};
+    slides.forEach((slide) => {
+      const axis = slide.dataset.axis;
+      const selected = slide.querySelector(".diag-point.selected");
+      prefs[axis] = selected ? parseInt(selected.dataset.value) : 3;
+    });
+    return prefs;
+  }
+
+  // --- Run analysis ---
+  function runAnalysis() {
+    const prefs = collectPreferences();
+
+    hideSection(wizard, () => {
+      showSection(analyzing);
+      analyzing.scrollIntoView({ behavior: "smooth", block: "center" });
+
+      // Simulate analysis time
+      setTimeout(() => {
+        const results = calculateMatch(prefs);
+        renderResults(results);
+
+        hideSection(analyzing, () => {
+          showSection(resultsSection);
+          resultsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+
+          // Stagger result cards
+          setTimeout(() => {
+            const cards = resultsSection.querySelectorAll(".result-card");
+            cards.forEach((card, i) => {
+              setTimeout(() => {
+                card.classList.add("visible");
+                const fill = card.querySelector(".result-match-fill");
+                if (fill) fill.style.width = fill.dataset.width;
+              }, 200 + i * 250);
+            });
+          }, 300);
+        });
+      }, 2200);
+    });
+  }
+
+  // --- Event: Start ---
+  startBtn.addEventListener("click", () => {
+    hideSection(intro, () => {
+      currentStep = 0;
+      // Reset all slides
+      slides.forEach((s, i) => {
+        s.classList.remove("active", "exit-left");
+        s.style.transform = "";
+      });
+      slides[0].classList.add("active");
+
+      goToStep(0);
+      showSection(wizard);
+    });
   });
 
-  // Retry
+  // --- Event: Next ---
+  nextBtn.addEventListener("click", () => {
+    if (currentStep < totalSteps - 1) {
+      goToStep(currentStep + 1);
+    } else {
+      runAnalysis();
+    }
+  });
+
+  // --- Event: Prev ---
+  prevBtn.addEventListener("click", () => {
+    if (currentStep > 0) {
+      goToStep(currentStep - 1);
+    }
+  });
+
+  // --- Event: Retry ---
   if (retryBtn) {
     retryBtn.addEventListener("click", () => {
-      resultsSection.style.opacity = "0";
-      resultsSection.style.transform = "translateY(16px)";
-      setTimeout(() => {
-        resultsSection.classList.add("hidden");
-        form.style.display = "";
-        form.style.transition = "opacity 0.5s ease, transform 0.5s ease";
-        requestAnimationFrame(() => {
-          form.style.opacity = "1";
-          form.style.transform = "translateY(0)";
+      hideSection(resultsSection, () => {
+        // Reset selections
+        slides.forEach((slide) => {
+          const points = slide.querySelectorAll(".diag-point");
+          points.forEach((p) => p.classList.remove("selected"));
+          const mid = slide.querySelector('.diag-point[data-value="3"]');
+          if (mid) mid.classList.add("selected");
+          const lineFill = slide.querySelector(".diag-scale-line-fill");
+          if (lineFill) lineFill.style.width = "50%";
         });
 
-        // Scroll to diagnosis section
-        setTimeout(() => {
-          document.getElementById("diagnosis").scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-          });
-        }, 100);
-      }, 400);
+        showSection(intro);
+        document.getElementById("diagnosis").scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      });
     });
   }
 }
