@@ -250,25 +250,14 @@ function initDiagnosis() {
     }
   });
 
-  // --- Show/hide helpers (CSS animation class based) ---
+  // --- Show/hide helpers (direct class toggle, no animation dependency) ---
   function showSection(el) {
-    el.classList.remove("hidden", "section-fade-out");
-    el.classList.add("section-fade-in");
-    el.addEventListener("animationend", function handler() {
-      el.classList.remove("section-fade-in");
-      el.removeEventListener("animationend", handler);
-    });
+    el.classList.remove("hidden");
   }
 
   function hideSection(el, callback) {
-    el.classList.remove("section-fade-in");
-    el.classList.add("section-fade-out");
-    el.addEventListener("animationend", function handler() {
-      el.classList.remove("section-fade-out");
-      el.classList.add("hidden");
-      el.removeEventListener("animationend", handler);
-      if (callback) callback();
-    });
+    el.classList.add("hidden");
+    if (callback) setTimeout(callback, 50);
   }
 
   // --- Step navigation ---
