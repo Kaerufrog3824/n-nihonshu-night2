@@ -253,13 +253,14 @@ function initDiagnosis() {
   // --- Show/hide helpers ---
   function showSection(el) {
     el.classList.remove("hidden");
+    el.style.transition = "none";
     el.style.opacity = "0";
     el.style.transform = "translateY(20px)";
+    // Force reflow so the browser registers the initial state
+    void el.offsetHeight;
     el.style.transition = "opacity 0.5s ease, transform 0.5s ease";
-    requestAnimationFrame(() => {
-      el.style.opacity = "1";
-      el.style.transform = "translateY(0)";
-    });
+    el.style.opacity = "1";
+    el.style.transform = "translateY(0)";
   }
 
   function hideSection(el, callback) {
@@ -363,19 +364,33 @@ function initDiagnosis() {
     });
   }
 
+  // --- Initialize wizard to step 0 ---
+  function resetWizard() {
+    currentStep = 0;
+    slides.forEach((s) => {
+      s.classList.remove("active", "exit-left");
+      s.style.transform = "";
+    });
+    slides[0].classList.add("active");
+
+    progressFill.style.width = "25%";
+    stepDots.forEach((dot, i) => {
+      dot.classList.remove("active", "done");
+      if (i === 0) dot.classList.add("active");
+    });
+    stepCounter.textContent = "1";
+    prevBtn.disabled = true;
+    nextBtn.innerHTML =
+      '<span>次へ</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>';
+    nextBtn.classList.remove("final-step");
+  }
+
   // --- Event: Start ---
   startBtn.addEventListener("click", () => {
     hideSection(intro, () => {
-      currentStep = 0;
-      // Reset all slides
-      slides.forEach((s, i) => {
-        s.classList.remove("active", "exit-left");
-        s.style.transform = "";
-      });
-      slides[0].classList.add("active");
-
-      goToStep(0);
+      resetWizard();
       showSection(wizard);
+      wizard.scrollIntoView({ behavior: "smooth", block: "start" });
     });
   });
 
@@ -399,7 +414,7 @@ function initDiagnosis() {
   if (retryBtn) {
     retryBtn.addEventListener("click", () => {
       hideSection(resultsSection, () => {
-        // Reset selections
+        // Reset selections to default (value 3)
         slides.forEach((slide) => {
           const points = slide.querySelectorAll(".diag-point");
           points.forEach((p) => p.classList.remove("selected"));
@@ -410,10 +425,12 @@ function initDiagnosis() {
         });
 
         showSection(intro);
-        document.getElementById("diagnosis").scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
+        setTimeout(() => {
+          document.getElementById("diagnosis").scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }, 100);
       });
     });
   }
