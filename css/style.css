@@ -90,6 +90,25 @@ a {
   transform: translateY(0);
 }
 
+/* ---------- Section show/hide animations ---------- */
+.section-fade-in {
+  animation: sectionFadeIn 0.5s ease forwards;
+}
+
+.section-fade-out {
+  animation: sectionFadeOut 0.4s ease forwards;
+}
+
+@keyframes sectionFadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes sectionFadeOut {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-16px); }
+}
+
 /* ============================================
    NAVIGATION
    ============================================ */

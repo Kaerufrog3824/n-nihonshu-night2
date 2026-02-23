@@ -250,30 +250,25 @@ function initDiagnosis() {
     }
   });
 
-  // --- Show/hide helpers ---
+  // --- Show/hide helpers (CSS animation class based) ---
   function showSection(el) {
-    el.classList.remove("hidden");
-    el.style.transition = "none";
-    el.style.opacity = "0";
-    el.style.transform = "translateY(20px)";
-    // Force reflow so the browser registers the initial state
-    void el.offsetHeight;
-    el.style.transition = "opacity 0.5s ease, transform 0.5s ease";
-    el.style.opacity = "1";
-    el.style.transform = "translateY(0)";
+    el.classList.remove("hidden", "section-fade-out");
+    el.classList.add("section-fade-in");
+    el.addEventListener("animationend", function handler() {
+      el.classList.remove("section-fade-in");
+      el.removeEventListener("animationend", handler);
+    });
   }
 
   function hideSection(el, callback) {
-    el.style.transition = "opacity 0.4s ease, transform 0.4s ease";
-    el.style.opacity = "0";
-    el.style.transform = "translateY(-16px)";
-    setTimeout(() => {
+    el.classList.remove("section-fade-in");
+    el.classList.add("section-fade-out");
+    el.addEventListener("animationend", function handler() {
+      el.classList.remove("section-fade-out");
       el.classList.add("hidden");
-      el.style.opacity = "";
-      el.style.transform = "";
-      el.style.transition = "";
+      el.removeEventListener("animationend", handler);
       if (callback) callback();
-    }, 400);
+    });
   }
 
   // --- Step navigation ---
