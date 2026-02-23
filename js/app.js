@@ -176,13 +176,25 @@ function renderLineup() {
       })
       .join("");
 
+    // Extract short name (first word/part before space) for placeholder
+    const shortName = sake.name.split(/\s+/)[0];
+
     card.innerHTML = `
-      <span class="sake-card-number">#${String(sake.id).padStart(2, "0")}</span>
-      <h3 class="sake-card-name">${sake.name}</h3>
-      <span class="sake-card-type">${sake.type}</span>
-      <p class="sake-card-meta">${sake.brewery}（${sake.region}）</p>
-      <p class="sake-card-desc">${sake.desc}</p>
-      <div class="sake-profile">${profileHTML}</div>
+      <div class="sake-card-visual">
+        <div class="sake-card-placeholder">
+          <span class="sake-card-placeholder-num">#${String(sake.id).padStart(2, "0")}</span>
+          <span class="sake-card-placeholder-name">${shortName}</span>
+          <span class="sake-card-placeholder-type">${sake.type}</span>
+        </div>
+        ${sake.image ? `<img src="${sake.image}" alt="${sake.name}" class="sake-card-img" onerror="this.remove()">` : ""}
+      </div>
+      <div class="sake-card-body">
+        <h3 class="sake-card-name">${sake.name}</h3>
+        <span class="sake-card-type">${sake.type}</span>
+        <p class="sake-card-meta">${sake.brewery}（${sake.region}）</p>
+        <p class="sake-card-desc">${sake.desc}</p>
+        <div class="sake-profile">${profileHTML}</div>
+      </div>
     `;
 
     grid.appendChild(card);

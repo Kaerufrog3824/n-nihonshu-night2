@@ -483,7 +483,7 @@ a {
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: var(--radius);
-  padding: 28px 24px;
+  overflow: hidden;
   transition: transform var(--transition), background var(--transition),
               border-color var(--transition), box-shadow var(--transition);
   cursor: default;
@@ -503,22 +503,86 @@ a {
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
 }
 
-.sake-card-number {
+/* Card image area */
+.sake-card-visual {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+  background: linear-gradient(160deg, #0f1d3a 0%, #162856 50%, #0e1b3d 100%);
+}
+
+.sake-card-img {
   position: absolute;
-  top: 16px;
-  right: 20px;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.sake-card-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 20px;
+}
+
+.sake-card-placeholder::before {
+  content: "";
+  position: absolute;
+  inset: 16px;
+  border: 1px solid rgba(201, 169, 110, 0.15);
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.sake-card-placeholder-num {
   font-family: "Noto Serif JP", serif;
-  font-size: 0.7rem;
-  color: var(--text-muted);
-  letter-spacing: 0.05em;
+  font-size: 0.65rem;
+  color: rgba(201, 169, 110, 0.35);
+  letter-spacing: 0.15em;
+}
+
+.sake-card-placeholder-name {
+  font-family: "Noto Serif JP", serif;
+  font-size: 2rem;
+  font-weight: 900;
+  color: rgba(201, 169, 110, 0.2);
+  letter-spacing: 0.15em;
+  line-height: 1.2;
+  writing-mode: vertical-rl;
+  max-height: 120px;
+}
+
+.sake-card-placeholder-type {
+  font-size: 0.6rem;
+  color: rgba(201, 169, 110, 0.25);
+  letter-spacing: 0.2em;
+}
+
+.sake-card:hover .sake-card-placeholder-name {
+  color: rgba(201, 169, 110, 0.3);
+}
+
+.sake-card:hover .sake-card-placeholder::before {
+  border-color: rgba(201, 169, 110, 0.25);
+}
+
+/* Card text body */
+.sake-card-body {
+  position: relative;
+  padding: 20px 24px 24px;
 }
 
 .sake-card-name {
   font-family: "Noto Serif JP", serif;
-  font-size: 1.15rem;
+  font-size: 1.1rem;
   font-weight: 700;
   margin-bottom: 6px;
-  padding-right: 28px;
   color: var(--white);
 }
 
@@ -530,21 +594,21 @@ a {
   border: 1px solid var(--gold);
   color: var(--gold);
   border-radius: 100px;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   letter-spacing: 0.05em;
 }
 
 .sake-card-meta {
   font-size: 0.78rem;
   color: var(--text-muted);
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .sake-card-desc {
   font-size: 0.85rem;
   color: var(--text-light);
   line-height: 1.7;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 /* Taste profile bar */
