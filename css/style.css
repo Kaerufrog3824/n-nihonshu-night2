@@ -1256,6 +1256,14 @@ a {
   margin: 0;
 }
 
+/* Slack share wrap */
+.slack-share-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
 /* Slack share button */
 .btn-slack {
   display: flex;
@@ -1272,7 +1280,7 @@ a {
   font-weight: 600;
   letter-spacing: 0.04em;
   cursor: pointer;
-  transition: all var(--transition);
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
   box-shadow: 0 4px 20px rgba(74, 21, 75, 0.4);
 }
 
@@ -1280,6 +1288,10 @@ a {
   width: 18px;
   height: 18px;
   flex-shrink: 0;
+}
+
+.btn-slack .check-icon {
+  display: none;
 }
 
 .btn-slack:hover {
@@ -1291,6 +1303,44 @@ a {
 .btn-slack.copied {
   background: linear-gradient(135deg, #2eb67d, #36c98a);
   box-shadow: 0 4px 20px rgba(46, 182, 125, 0.4);
+  animation: slack-pop 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.btn-slack.copied .slack-icon {
+  display: none;
+}
+
+.btn-slack.copied .check-icon {
+  display: block;
+}
+
+.btn-slack.copied:hover {
+  background: linear-gradient(135deg, #36c98a, #2eb67d);
+  box-shadow: 0 6px 28px rgba(46, 182, 125, 0.55);
+}
+
+@keyframes slack-pop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+
+/* Hint text under Slack button */
+.slack-share-hint {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-align: center;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  height: 0;
+  overflow: hidden;
+}
+
+.slack-share-hint.visible {
+  opacity: 1;
+  transform: translateY(0);
+  height: auto;
 }
 
 /* ============================================
