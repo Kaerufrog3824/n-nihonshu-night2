@@ -424,6 +424,39 @@ function initDiagnosis() {
       });
     });
   }
+
+  // --- Event: Share to Slack ---
+  const shareSlackBtn = document.getElementById("share-slack-btn");
+  if (shareSlackBtn) {
+    shareSlackBtn.addEventListener("click", () => {
+      // Get the #1 result (BEST sake)
+      const firstCard = resultsSection.querySelector(".result-card");
+      if (!firstCard) return;
+
+      const name = firstCard.querySelector(".result-name").textContent;
+      const meta = firstCard.querySelector(".result-meta").textContent;
+      const matchPct = firstCard.querySelector(".result-match-pct").textContent;
+
+      const text =
+        `:sake: 日本酒診断の結果、私のBESTは *${name}* でした！\n` +
+        `${meta}（マッチ度 ${matchPct}）\n` +
+        `#n日本酒の会night2`;
+
+      navigator.clipboard.writeText(text).then(() => {
+        shareSlackBtn.classList.add("copied");
+        shareSlackBtn.querySelector("span").textContent = "コピーしました！Slackに貼り付けてね";
+        setTimeout(() => {
+          shareSlackBtn.classList.remove("copied");
+          shareSlackBtn.querySelector("span").textContent = "診断結果を #hobby-nihonshu に投稿";
+        }, 3000);
+      });
+
+      window.open(
+        "https://nikkeidevs.slack.com/archives/C08PQ6NUTU1",
+        "_blank"
+      );
+    });
+  }
 }
 
 /* --------------------------------------------------
