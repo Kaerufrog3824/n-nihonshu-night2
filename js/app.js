@@ -274,21 +274,15 @@ function initDiagnosis() {
 
   // --- Step navigation ---
   function goToStep(step) {
-    const dir = step > currentStep ? 1 : -1;
+    // Deactivate current slide, clear inline styles
+    slides[currentStep].classList.remove("active", "exit-left");
+    slides[currentStep].style.transform = "";
 
-    // Exit current slide
-    slides[currentStep].classList.remove("active");
-    slides[currentStep].classList.add(dir > 0 ? "exit-left" : "");
-    slides[currentStep].style.transform = `translateX(${dir > 0 ? "-60px" : "60px"})`;
-
-    // Enter new slide
+    // Activate new slide
     currentStep = step;
-    slides[currentStep].style.transform = `translateX(${dir > 0 ? "60px" : "-60px"})`;
     slides[currentStep].classList.remove("exit-left");
-
-    requestAnimationFrame(() => {
-      slides[currentStep].classList.add("active");
-    });
+    slides[currentStep].style.transform = "";
+    slides[currentStep].classList.add("active");
 
     // Update progress
     progressFill.style.width = `${((currentStep + 1) / totalSteps) * 100}%`;
