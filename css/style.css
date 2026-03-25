@@ -297,11 +297,18 @@ a {
 }
 
 /* Hero CTA */
+.hero-cta-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin-top: 36px;
+}
+
 .hero-cta {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  margin-top: 36px;
   padding: 14px 36px;
   border: 1px solid var(--gold);
   border-radius: 100px;
@@ -311,6 +318,19 @@ a {
   letter-spacing: 0.1em;
   transition: all var(--transition);
   animation: ctaPulse 3s ease-in-out infinite;
+}
+
+.hero-cta-secondary {
+  border-color: rgba(255, 255, 255, 0.25);
+  color: var(--text-light);
+  animation: none;
+}
+
+.hero-cta-secondary:hover {
+  border-color: var(--text-light);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  box-shadow: none;
 }
 
 .hero-cta svg {
