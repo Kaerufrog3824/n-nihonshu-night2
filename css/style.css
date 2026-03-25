@@ -263,8 +263,6 @@ a {
   height: 160px;
   object-fit: contain;
   margin: 0 auto;
-  border-radius: 50%;
-  box-shadow: 0 0 60px rgba(59, 111, 212, 0.25);
 }
 
 .hero-title {
