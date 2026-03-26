@@ -14,11 +14,11 @@
  *    region:  "都道府県",             // 産地
  *    desc:    "一言コメント",          // 簡単な説明
  *    image:   "images/sake/13.jpg",   // 瓶ラベル画像（images/sake/ に配置）
- *    // --- 味わいプロファイル（各 1〜5）---
- *    sweetDry:  3,  // 1=甘口  ⇔ 5=辛口
- *    richLight: 3,  // 1=芳醇  ⇔ 5=淡麗
- *    aroma:     3,  // 1=フルーティー ⇔ 5=スッキリ
- *    mouthfeel: 3,  // 1=まろやか ⇔ 5=キレ
+ *    // --- 味わいプロファイル（各 1〜5、数値が大きいほど強い）---
+ *    sweetDry:  3,  // 甘さ（1=すっきり ⇔ 5=甘い）
+ *    richLight: 3,  // 濃醇さ（1=あっさり ⇔ 5=濃醇）
+ *    aroma:     3,  // フルーティーさ（1=控えめ ⇔ 5=華やか）
+ *    mouthfeel: 3,  // まろやかさ（1=キレ ⇔ 5=まろやか）
  *  }
  *
  * ===================================================
@@ -33,10 +33,10 @@ const SAKE_LIST = [
     region: "秋田県",
     desc: "木桶仕込みならではのやわらかな酸味と上品な甘み。花のような余韻が広がる革新的な一本。",
     image: "images/sake/01.jpg",
-    sweetDry: 2,
-    richLight: 4,
-    aroma: 2,
-    mouthfeel: 2,
+    sweetDry: 4,
+    richLight: 2,
+    aroma: 4,
+    mouthfeel: 4,
   },
   {
     id: 2,
@@ -46,10 +46,10 @@ const SAKE_LIST = [
     region: "秋田県",
     desc: "ほのかなにごりとやさしい甘み。フレッシュな微発泡感が心地よい、親しみやすい味わい。",
     image: "images/sake/02.jpg",
-    sweetDry: 2,
+    sweetDry: 4,
     richLight: 3,
-    aroma: 2,
-    mouthfeel: 2,
+    aroma: 4,
+    mouthfeel: 4,
   },
   {
     id: 3,
@@ -59,9 +59,9 @@ const SAKE_LIST = [
     region: "秋田県",
     desc: "搾りたてを超速で瓶詰め。フレッシュな果実香とジューシーな旨味が弾ける、生原酒の醍醐味。",
     image: "images/sake/03.jpg",
-    sweetDry: 2,
-    richLight: 2,
-    aroma: 1,
+    sweetDry: 4,
+    richLight: 4,
+    aroma: 5,
     mouthfeel: 3,
   },
   {
@@ -73,9 +73,9 @@ const SAKE_LIST = [
     desc: "繊細で透明感のある吟醸香と、シルクのようになめらかな口当たり。気品あふれるエレガントな一杯。",
     image: "images/sake/04.jpg",
     sweetDry: 3,
-    richLight: 4,
-    aroma: 1,
-    mouthfeel: 2,
+    richLight: 2,
+    aroma: 5,
+    mouthfeel: 4,
   },
   {
     id: 5,
@@ -85,10 +85,10 @@ const SAKE_LIST = [
     region: "島根県",
     desc: "力強い旨味と厚みのあるコク。生原酒のパワフルさと春限定のフレッシュ感が同居する通好みの逸品。",
     image: "images/sake/05.jpg",
-    sweetDry: 4,
-    richLight: 1,
+    sweetDry: 2,
+    richLight: 5,
     aroma: 3,
-    mouthfeel: 4,
+    mouthfeel: 2,
   },
   {
     id: 6,
@@ -98,10 +98,10 @@ const SAKE_LIST = [
     region: "山口県",
     desc: "白桃やマスカットを思わせる華やかな果実香。うすにごりのやわらかな甘みと微発泡が弾ける。",
     image: "images/sake/06.jpg",
-    sweetDry: 1,
-    richLight: 2,
-    aroma: 1,
-    mouthfeel: 1,
+    sweetDry: 5,
+    richLight: 4,
+    aroma: 5,
+    mouthfeel: 5,
   },
   {
     id: 7,
@@ -111,10 +111,10 @@ const SAKE_LIST = [
     region: "福島県",
     desc: "クリーミーなにごりに包まれたやさしい甘味と酸味。活性のシュワッと感がたまらない冬の風物詩。",
     image: "images/sake/07.jpg",
-    sweetDry: 1,
-    richLight: 2,
-    aroma: 2,
-    mouthfeel: 1,
+    sweetDry: 5,
+    richLight: 4,
+    aroma: 4,
+    mouthfeel: 5,
   },
   {
     id: 8,
@@ -124,9 +124,9 @@ const SAKE_LIST = [
     region: "茨城県",
     desc: "さくら花酵母が生み出す華やかな香りと甘酸っぱい味わい。春を感じるやわらかなうすにごり。",
     image: "images/sake/08.jpg",
-    sweetDry: 1,
+    sweetDry: 5,
     richLight: 3,
-    aroma: 1,
-    mouthfeel: 2,
+    aroma: 5,
+    mouthfeel: 4,
   },
 ];
