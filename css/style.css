@@ -1561,18 +1561,13 @@ a {
   }
 
   .diag-scale {
-    flex-direction: column;
-    gap: 8px;
+    gap: 10px;
   }
 
   .diag-scale-label {
-    width: 100%;
-    text-align: center;
-    font-size: 0.8rem;
+    width: 64px;
+    font-size: 0.72rem;
   }
-
-  .diag-scale-label-left { order: -1; }
-  .diag-scale-label-right { order: 1; }
 
   .diag-point {
     width: 40px;
