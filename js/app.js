@@ -151,10 +151,10 @@ function renderLineup() {
   if (!grid || typeof SAKE_LIST === "undefined") return;
 
   const axisLabels = {
-    sweetDry: "甘辛",
-    richLight: "濃淡",
-    aroma: "香り",
-    mouthfeel: "飲み口",
+    sweetDry: "甘さ",
+    richLight: "濃醇さ",
+    aroma: "フルーティーさ",
+    mouthfeel: "まろやかさ",
   };
 
   SAKE_LIST.forEach((sake, index) => {
