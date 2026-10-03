@@ -13,7 +13,7 @@
  *    brewery: "蔵元名",               // 蔵元
  *    region:  "都道府県",             // 産地
  *    desc:    "一言コメント",          // 簡単な説明
- *    image:   "images/sake/13.jpg",   // 瓶ラベル画像（images/sake/ に配置）
+ *    image:   "images/sake/13.JPG",   // 瓶ラベル画像（images/sake/ に配置）
  *    // --- 味わいプロファイル（各 1〜5、数値が大きいほど強い）---
  *    sweetDry:  3,  // 甘さ（1=すっきり ⇔ 5=甘い）
  *    richLight: 3,  // 濃醇さ（1=あっさり ⇔ 5=濃醇）
@@ -32,7 +32,7 @@ const SAKE_LIST = [
     brewery: "新政酒造",
     region: "秋田県",
     desc: "木桶仕込みならではのやわらかな酸味と上品な甘み。花のような余韻が広がる革新的な一本。",
-    image: "images/sake/01.jpg",
+    image: "images/sake/01.JPG",
     sweetDry: 4,
     richLight: 2,
     aroma: 4,
@@ -45,7 +45,7 @@ const SAKE_LIST = [
     brewery: "福禄寿酒造",
     region: "秋田県",
     desc: "ほのかなにごりとやさしい甘み。フレッシュな微発泡感が心地よい、親しみやすい味わい。",
-    image: "images/sake/02.jpg",
+    image: "images/sake/02.JPG",
     sweetDry: 4,
     richLight: 3,
     aroma: 4,
@@ -58,7 +58,7 @@ const SAKE_LIST = [
     brewery: "木村酒造",
     region: "秋田県",
     desc: "搾りたてを超速で瓶詰め。フレッシュな果実香とジューシーな旨味が弾ける、生原酒の醍醐味。",
-    image: "images/sake/03.jpg",
+    image: "images/sake/03.JPG",
     sweetDry: 4,
     richLight: 4,
     aroma: 5,
@@ -71,7 +71,7 @@ const SAKE_LIST = [
     brewery: "黒龍酒造",
     region: "福井県",
     desc: "繊細で透明感のある吟醸香と、シルクのようになめらかな口当たり。気品あふれるエレガントな一杯。",
-    image: "images/sake/04.jpg",
+    image: "images/sake/04.JPG",
     sweetDry: 3,
     richLight: 2,
     aroma: 5,
@@ -84,7 +84,7 @@ const SAKE_LIST = [
     brewery: "王祿酒造",
     region: "島根県",
     desc: "力強い旨味と厚みのあるコク。生原酒のパワフルさと春限定のフレッシュ感が同居する通好みの逸品。",
-    image: "images/sake/05.jpg",
+    image: "images/sake/05.JPG",
     sweetDry: 2,
     richLight: 5,
     aroma: 3,
@@ -97,7 +97,7 @@ const SAKE_LIST = [
     brewery: "長州酒造",
     region: "山口県",
     desc: "白桃やマスカットを思わせる華やかな果実香。うすにごりのやわらかな甘みと微発泡が弾ける。",
-    image: "images/sake/06.jpg",
+    image: "images/sake/06.JPG",
     sweetDry: 5,
     richLight: 4,
     aroma: 5,
@@ -110,7 +110,7 @@ const SAKE_LIST = [
     brewery: "松崎酒造",
     region: "福島県",
     desc: "クリーミーなにごりに包まれたやさしい甘味と酸味。活性のシュワッと感がたまらない冬の風物詩。",
-    image: "images/sake/07.jpg",
+    image: "images/sake/07.JPG",
     sweetDry: 5,
     richLight: 4,
     aroma: 4,
@@ -123,7 +123,7 @@ const SAKE_LIST = [
     brewery: "来福酒造",
     region: "茨城県",
     desc: "さくら花酵母が生み出す華やかな香りと甘酸っぱい味わい。春を感じるやわらかなうすにごり。",
-    image: "images/sake/08.jpg",
+    image: "images/sake/08.JPG",
     sweetDry: 5,
     richLight: 3,
     aroma: 5,
